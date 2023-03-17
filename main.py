@@ -66,9 +66,10 @@ def main():
     watermark = "Mr. Landlord"
     full_output = "templates/watermarked/docs.pdf"
 
-    dir_entries = list(map(lambda f: f"templates/{f}", os.listdir("templates")))
+    dir_entries = list(map(lambda f: f"templates/source/{f}", os.listdir("templates/source")))
     dir_files = list(filter(lambda f: os.path.isfile(f), dir_entries))
-    dir_files.remove("templates/.DS_Store")
+    if "templates/source/.DS_Store" in dir_files:
+        dir_files.remove("templates/source/.DS_Store")
 
     merge_pdfs(dir_files, full_output) # merge all pdf files in 1
     watermark_pdf_doc(full_output, watermark) # watermark file
